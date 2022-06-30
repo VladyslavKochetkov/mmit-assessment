@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/mmit-assessment/static/css/main.1db1e07a.css",
+    "main.js": "/mmit-assessment/static/js/main.e8b10058.js",
+    "static/js/787.d20dcdb4.chunk.js": "/mmit-assessment/static/js/787.d20dcdb4.chunk.js",
+    "index.html": "/mmit-assessment/index.html",
+    "main.1db1e07a.css.map": "/mmit-assessment/static/css/main.1db1e07a.css.map",
+    "main.e8b10058.js.map": "/mmit-assessment/static/js/main.e8b10058.js.map",
+    "787.d20dcdb4.chunk.js.map": "/mmit-assessment/static/js/787.d20dcdb4.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1db1e07a.css",
+    "static/js/main.e8b10058.js"
+  ]
+}
