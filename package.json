@@ -1,7 +1,7 @@
 {
-  "name": "nutrisense",
+  "name": "mmit",
   "version": "0.1.0",
-  "homepage": "https://vladyslavkochetkov.github.io/nutrisense-battleship",
+  "homepage": "https://vladyslavkochetkov.github.io/mmit-assessment",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.9.3",

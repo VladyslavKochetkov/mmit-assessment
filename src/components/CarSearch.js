@@ -4,21 +4,11 @@ import {
   Checkbox,
   Chip,
   CircularProgress,
-  Divider,
   FormControl,
   FormLabel,
   InputLabel,
   MenuItem,
-  Paper,
   Select,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableFooter,
-  TableHead,
-  TablePagination,
-  TableRow,
   TextField,
   Typography,
 } from "@mui/material";
@@ -40,7 +30,7 @@ const makeSearchUrl = (type, makes, year) =>
       }/vehicleType/${type.Name.trim()}?format=json`
   );
 
-const CarSearch = () => {
+const CarSearch = ({ setResults }) => {
   const [vehicleTypes, setVehicleTypes] = useState(null);
   const [vehicleMakes, setVehicleMakes] = useState(null);
   const [selectedVehicle, setSelectedVehicle] = useState(null);
@@ -49,9 +39,6 @@ const CarSearch = () => {
   const [year, setYear] = useState("");
   const [lastSearchUrl, setLastSearchUrl] = useState(null);
   const [searching, setSearching] = useState(false);
-  const [results, setResults] = useState(null);
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
 
   useEffect(() => {
     const getVehicles = async () => {
@@ -98,13 +85,12 @@ const CarSearch = () => {
       allCarsRequests.map((req) => req.json())
     );
     const allCars = allCarsJSON.map((cars) => cars.Results).flat();
-    setPage(0);
     setResults(allCars);
     setSearching(false);
-  }, [selectedVehicle, selectedMakes, useYear, year]);
+  }, [selectedVehicle, selectedMakes, useYear, year, setResults]);
 
   return (
-    <div className="lg:max-w-lg w-full">
+    <div>
       <Typography variant="h5" component={"h2"}>
         Car Search
       </Typography>
@@ -230,55 +216,6 @@ const CarSearch = () => {
         </Button>
         {searching && <CircularProgress size={24} className="mt-4" />}
       </FormControl>
-      {results && (
-        <>
-          <Divider className="my-4" />
-          <TableContainer component={Paper}>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell className="text-center font-bold">
-                    Make ID
-                  </TableCell>
-                  <TableCell className="text-center font-bold">
-                    Make Name
-                  </TableCell>
-                  <TableCell className="text-center font-bold">
-                    Model ID
-                  </TableCell>
-                  <TableCell className="text-center font-bold">
-                    Model Name
-                  </TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {results
-                  .slice(page * rowsPerPage, (page + 1) * rowsPerPage)
-                  .map((result) => (
-                    <TableRow key={result.Model_ID}>
-                      <TableCell>{result.Make_ID}</TableCell>
-                      <TableCell>{result.Make_Name}</TableCell>
-                      <TableCell>{result.Model_ID}</TableCell>
-                      <TableCell>{result.Model_Name}</TableCell>
-                    </TableRow>
-                  ))}
-              </TableBody>
-              <TableFooter>
-                <TablePagination
-                  rowsPerPage={rowsPerPage}
-                  count={results.length}
-                  page={page}
-                  onPageChange={(_, newPage) => setPage(newPage)}
-                  onRowsPerPageChange={({ target: { value } }) => {
-                    setRowsPerPage(value);
-                    setPage(0);
-                  }}
-                />
-              </TableFooter>
-            </Table>
-          </TableContainer>
-        </>
-      )}
     </div>
   );
 };
